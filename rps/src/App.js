@@ -14,7 +14,7 @@ class App extends React.Component {
     return (
       <div id='game'>
         <div id='gradient'></div>
-        <h1>ROCK PAPER SCISSORS</h1>
+        <h1>ROCK PAPER SCISSORS Game</h1>
         <h2>3</h2>
         <div id="hands">
           <img src="images/paper.svg" alt="" />
