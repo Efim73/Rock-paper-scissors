@@ -72,6 +72,7 @@ h1:before{
 }
 
 h2{
+  opacity: 0;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -119,6 +120,32 @@ h2{
   text-align: center;
   transform: translateY(50%);
 
+}
+.buttonBlocked{
+  pointer-events: none;
+  opacity: 0.5;
+}
+.activeButton{
+  opacity: 1 !important;
+}
+
+
+.counterVisible{
+  animation-name: counter;
+  animation-duration: 1s;
+  animation-iteration-count: 3;
+
+}
+@keyframes counter {
+  0%{
+    opacity: 0;
+    transform:  translate(-50%, -50%) scale(10);
+
+  }
+  100%{
+    opacity: 1;
+    transform:  translate(-50%, -50%) scale(1);
+  }
 }
 
 
