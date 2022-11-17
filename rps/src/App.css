@@ -6,6 +6,7 @@ body{
   background: url('../public/images/les.jpg') ;
   background-attachment: fixed;
   background-size: cover;
+  overflow: hidden;
 }
 
 
@@ -25,12 +26,21 @@ body{
   
 }
 #gradient{
+  transition: 0.7s;
+  opacity: 0;
   border-radius: 15px;
   position: absolute;
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, rgba(78,255,0,0.5858718487394958) 0%, rgba(255,255,255,0) 50%, rgba(255,45,45,0.5970763305322129) 100%);
 
+}
+.winGradient{
+  opacity: 1 !important;
+}
+.losingGradient{
+  opacity: 1 !important;
+  background: linear-gradient(270deg, rgba(78,255,0,0.5858718487394958) 0%, rgba(255,255,255,0) 50%, rgba(255,45,45,0.5970763305322129) 100%) !important;
 }
 h1{
   text-align: center;
@@ -85,19 +95,31 @@ h2{
 
 }
 
-.hands{
+/* .hands{
   width: 100%;
 
 
-}
+} */
+/* #hands{
+  overflow: hidden;
+} */
 #hands img{
+  opacity: 0;
+  transform: scale(5) translateX(-100%);
   width: 30%;
   /* для того чтобы работал z-index */
   position: relative;
   z-index: 5;
+  transition: 0.7s;
 }
 #hands img:last-child{
   float: right;
+  transform: scale(5) translateX(100%);
+  transition: 0.7s;
+}
+.handsVisible{
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 #options img{
