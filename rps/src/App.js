@@ -16,6 +16,9 @@ class App extends React.Component {
       activeButton: null,
       handClass: '',
       result: 'draw',
+      games: 10,
+      firstScore: 0,
+      secondScore: 0,
 
     }
   }
@@ -25,7 +28,9 @@ class App extends React.Component {
       buttonClass: 'buttonBlocked',
       activeButton: id,
       handClass: '',
+      result: '',
     })
+
     for(let i=0; i<4; i++){
       setTimeout(()=>{
         // console.log(this.state.counter);
@@ -35,8 +40,11 @@ class App extends React.Component {
           }
         })
         if(i==3){
+
           this.setState(function(state){
             let result;
+            let  firstScore=state.firstScore;
+            let  secondScore = state.secondScore;
             let playerHand = state.playerHand;
             let bot = state.bot
             if(playerHand==='rock' && bot ==='paper'){
@@ -61,8 +69,17 @@ class App extends React.Component {
               result='draw'
 
             }
-            console.log(result);
+            if(result==='win'){
+              firstScore = state.firstScore + 1;
+
+            }
+            else if(result==='losing'){
+              secondScore = state.secondScore + 1;
+            }
+            console.log(firstScore);
             return{
+              firstScore: firstScore,
+              secondScore: secondScore,
               result: result,
               counter: 3,
               counterClass: '',  
@@ -82,17 +99,26 @@ class App extends React.Component {
       },1000+i*1000)
     }
 
-    console.log(id);
+    // console.log(id);
   }
   render() {
+    let result = this.state.result;
     let gradientClass;
+    let wins = 0;
+    console.log(result);
     if(result==='win'){
+      console.log(wins);
+      wins = wins+1;
       gradientClass='winGradient'
     }
-    if(result==='losing'){
+    else if(result==='losing'){
+      console.log(wins);
+      wins = 0;
       gradientClass='losingGradient'
     }
     else{
+      console.log(wins);
+      wins = 0;
       gradientClass=''
     }
 
@@ -106,6 +132,11 @@ class App extends React.Component {
         <div id="hands">
           <img className={this.state.handClass} src={"images/"+this.state.playerHand+'.svg'} alt="" />
           <img className={this.state.handClass} src={"images/"+this.state.bot+'.svg'} alt="" />
+        </div>
+        <div className='score'>
+          <h3 className='firstScore'>{this.state.firstScore}</h3>
+          <h3 className='secondScore'>{this.state.secondScore}</h3>
+
         </div>
         <div id="options">
           {
@@ -129,4 +160,4 @@ class App extends React.Component {
 export default App;
 
 
-// завершить градиент , в консоле выводить кол-во побед пдряд
+// изменить ширину цифр. усли выбираешь руку то цифры пропадают, потом появляются.

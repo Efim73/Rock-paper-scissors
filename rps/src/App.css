@@ -158,6 +158,31 @@ h2{
   animation-iteration-count: 3;
 
 }
+
+.score{
+
+}
+h3{
+  width: 30%;
+  font-size: 50px;
+  font-family: 'Permanent Marker', cursive;
+  color: white;
+  /* text-shadow: 0 0 5px rgba(255, 255, 255, 0.61); */
+
+
+}
+
+.firstScore{
+  text-align: center;
+  position: relative;
+  float: left;
+}
+.secondScore{
+  text-align: center;
+
+  float: right;
+  margin-right: 0;
+}
 @keyframes counter {
   0%{
     opacity: 0;
