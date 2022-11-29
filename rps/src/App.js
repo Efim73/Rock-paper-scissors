@@ -16,19 +16,37 @@ class App extends React.Component {
       activeButton: null,
       handClass: '',
       result: 'draw',
-      games: 10,
+      games: 2,
       firstScore: 0,
       secondScore: 0,
+      scoreClass: 'score',
+      h1Text: ''
+
 
     }
   }
   optionsButton(e, id){
-    this.setState({
-      counterClass: 'counterVisible',
-      buttonClass: 'buttonBlocked',
-      activeButton: id,
-      handClass: '',
-      result: '',
+    
+    this.setState(function(state){
+      let games = state.games;
+      let firstScore = state.firstScore;
+      let secondScore = state.secondScore;
+      if(games == 2){
+        firstScore=0;
+        secondScore=0;
+      }
+      return{
+        firstScore: firstScore,
+        secondScore: secondScore,
+        h1Text: '',
+        counterClass: 'counterVisible',
+        buttonClass: 'buttonBlocked',
+        activeButton: id,
+        handClass: '',
+        result: '',
+        scoreClass: 'score',
+        counter:3,
+      }
     })
 
     for(let i=0; i<4; i++){
@@ -43,8 +61,7 @@ class App extends React.Component {
 
           this.setState(function(state){
             let result;
-            let  firstScore=state.firstScore;
-            let  secondScore = state.secondScore;
+
             let playerHand = state.playerHand;
             let bot = state.bot
             if(playerHand==='rock' && bot ==='paper'){
@@ -69,6 +86,25 @@ class App extends React.Component {
               result='draw'
 
             }
+
+
+            return{
+              result: result,
+              counterClass: '',  
+              buttonClass: '',
+            }
+            
+          },
+          // функция callBack вызывается после выполнения первой функции метода setState
+          function(){
+           this.setState(function(state){
+            let result = state.result;
+            let  firstScore=state.firstScore;
+            let  secondScore = state.secondScore;
+            let counterClass = state.counterClass;
+            let h1Text = state.h1Text;
+            let games = state.games;
+
             if(result==='win'){
               firstScore = state.firstScore + 1;
 
@@ -76,23 +112,61 @@ class App extends React.Component {
             else if(result==='losing'){
               secondScore = state.secondScore + 1;
             }
-            console.log(firstScore);
+            if(games==0){
+
+              if(firstScore>secondScore){
+                
+                h1Text='First player won'
+              }
+              else if(secondScore>firstScore){
+                h1Text='Second player won'
+              }
+              else{
+                h1Text='Draw'
+              }
+              counterClass='counterMessage';
+              games = 2;
+
+            }
             return{
+              games : games,
+              h1Text: h1Text,
               firstScore: firstScore,
               secondScore: secondScore,
-              result: result,
-              counter: 3,
-              counterClass: '',  
-              buttonClass: '',
+              scoreClass: 'score scoreVisible',
+              counterClass: counterClass,
+              counter : '',
+              
             }
             
+           }) 
           })
         }
         else if(i==2){
-          this.setState({
-            bot : this.state.images[Math.floor(Math.random()*3)],  
-            playerHand: this.state.images[id],
-            handClass: 'handsVisible'
+          // let games = this.state.games
+          // let firstScore = this.state.firstScore
+          // let secondScore = this.state.secondScore
+          // if(games==0, firstScore>secondScore){
+          //   this.setState({
+          //     h1Text: 'Win!!!'
+          //   })
+          // }
+          // if(games==0, firstScore<secondScore){
+          //   this.setState({
+          //     h1Text: 'Lose'
+          //   })
+          // }
+
+          this.setState(function(state){
+            return{
+              bot : state.images[Math.floor(Math.random()*3)],  
+              playerHand: state.images[id],
+              handClass: 'handsVisible',
+              games: state.games-1,
+            }
+
+          },function(){
+            console.log(this.state.games);
           })
         }
 
@@ -124,16 +198,17 @@ class App extends React.Component {
 
 
 
+
     return (
       <div id='game'>
         <div id='gradient' className={gradientClass}></div>
         <h1>ROCK PAPER SCISSORS</h1>
-        <h2 className={this.state.counterClass}>{this.state.counter}</h2>
+        <h2 className={this.state.counterClass}>{this.state.counter + this.state.h1Text}</h2>
         <div id="hands">
           <img className={this.state.handClass} src={"images/"+this.state.playerHand+'.svg'} alt="" />
           <img className={this.state.handClass} src={"images/"+this.state.bot+'.svg'} alt="" />
         </div>
-        <div className='score'>
+        <div className={this.state.scoreClass}>
           <h3 className='firstScore'>{this.state.firstScore}</h3>
           <h3 className='secondScore'>{this.state.secondScore}</h3>
 
@@ -160,4 +235,4 @@ class App extends React.Component {
 export default App;
 
 
-// изменить ширину цифр. усли выбираешь руку то цифры пропадают, потом появляются.
+// Найти картинки для заставки конфити. При победе менять фон сайта .

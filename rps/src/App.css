@@ -43,6 +43,8 @@ body{
   background: linear-gradient(270deg, rgba(78,255,0,0.5858718487394958) 0%, rgba(255,255,255,0) 50%, rgba(255,45,45,0.5970763305322129) 100%) !important;
 }
 h1{
+  font-weight: normal;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.562);
   text-align: center;
   transform: translateY(-50%);
   font-family: 'Permanent Marker', cursive;
@@ -74,7 +76,7 @@ h1:before{
   color: transparent;
   transition: 0.5s;
   position: absolute;
-  z-index: 2;
+  z-index: -1;
   top: 0;
   left: 0;
   width: 100%;
@@ -82,6 +84,7 @@ h1:before{
 }
 
 h2{
+  transition: 0.4s;
   opacity: 0;
   position: absolute;
   left: 50%;
@@ -158,18 +161,30 @@ h2{
   animation-iteration-count: 3;
 
 }
-
-.score{
-
+.counterMessage{
+  opacity: 1;
 }
+
 h3{
   width: 30%;
   font-size: 50px;
   font-family: 'Permanent Marker', cursive;
   color: white;
+  font-weight: normal;
   /* text-shadow: 0 0 5px rgba(255, 255, 255, 0.61); */
 
 
+}
+.score{
+  position: relative;
+  transition: 0.7s;
+  opacity: 0;
+  z-index: 5;
+
+
+}
+.scoreVisible{
+  opacity: 1;
 }
 
 .firstScore{
