@@ -20,7 +20,9 @@ class App extends React.Component {
       firstScore: 0,
       secondScore: 0,
       scoreClass: 'score',
-      h1Text: ''
+      h1Text: '',
+      divBackground: '',
+      gameBackground: 'usuallyBackground',
 
 
     }
@@ -104,6 +106,7 @@ class App extends React.Component {
             let counterClass = state.counterClass;
             let h1Text = state.h1Text;
             let games = state.games;
+            let gameBackground = 'usuallyBackground';
 
             if(result==='win'){
               firstScore = state.firstScore + 1;
@@ -115,10 +118,11 @@ class App extends React.Component {
             if(games==0){
 
               if(firstScore>secondScore){
-                
+                gameBackground='winBackground'
                 h1Text='First player won'
               }
               else if(secondScore>firstScore){
+                gameBackground='loseBackground'
                 h1Text='Second player won'
               }
               else{
@@ -129,6 +133,7 @@ class App extends React.Component {
 
             }
             return{
+              gameBackground : gameBackground,
               games : games,
               h1Text: h1Text,
               firstScore: firstScore,
@@ -200,7 +205,8 @@ class App extends React.Component {
 
 
     return (
-      <div id='game'>
+      <div id='game' >
+        <div  className={'bg '+this.state.gameBackground}> </div>
         <div id='gradient' className={gradientClass}></div>
         <h1>ROCK PAPER SCISSORS</h1>
         <h2 className={this.state.counterClass}>{this.state.counter + this.state.h1Text}</h2>
