@@ -19,17 +19,22 @@ body{
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
-  
-  transition: opacity 1s;
+  opacity: 0;
+  transition: opacity 5s;
+
+}
+.visibleBackground{
+  opacity: 1;
+}
+.forestBackground{
+  background-image: url('../public/images/les.jpg') ;
 
 }
 .winBackground{
-  opacity: 1;
   background-image: url('../public/images/vecteezyFesta-Junina-TemplateBackgroundfv0421_generated.jpg') ;
 }
 
 .loseBackground{
-  opacity: 1;
   background-image: url('../public/images/s1bl_suvt_180314.jpg') ;
 }
 .usuallyBackground{
@@ -70,6 +75,10 @@ body{
   opacity: 1 !important;
   background: linear-gradient(270deg, rgba(78,255,0,0.5858718487394958) 0%, rgba(255,255,255,0) 50%, rgba(255,45,45,0.5970763305322129) 100%) !important;
 }
+.purple{
+  color: purple;
+}
+
 h1{
   font-weight: normal;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.562);

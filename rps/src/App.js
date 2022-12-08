@@ -16,13 +16,13 @@ class App extends React.Component {
       activeButton: null,
       handClass: '',
       result: 'draw',
-      games: 2,
+      games: 10,
       firstScore: 0,
       secondScore: 0,
       scoreClass: 'score',
       h1Text: '',
       divBackground: '',
-      gameBackground: 'usuallyBackground',
+      gameBackground: '',
 
 
     }
@@ -33,11 +33,14 @@ class App extends React.Component {
       let games = state.games;
       let firstScore = state.firstScore;
       let secondScore = state.secondScore;
-      if(games == 2){
+      let gameBackground = state.gameBackground;
+      if(games == 10){
         firstScore=0;
         secondScore=0;
       }
       return{
+
+        gameBackground : gameBackground.replace('visibleBackground', ''),
         firstScore: firstScore,
         secondScore: secondScore,
         h1Text: '',
@@ -53,7 +56,6 @@ class App extends React.Component {
 
     for(let i=0; i<4; i++){
       setTimeout(()=>{
-        // console.log(this.state.counter);
         this.setState(function (state){
           return{
             counter: state.counter-1,
@@ -106,7 +108,7 @@ class App extends React.Component {
             let counterClass = state.counterClass;
             let h1Text = state.h1Text;
             let games = state.games;
-            let gameBackground = 'usuallyBackground';
+            let gameBackground = state.gameBackground;
 
             if(result==='win'){
               firstScore = state.firstScore + 1;
@@ -118,18 +120,18 @@ class App extends React.Component {
             if(games==0){
 
               if(firstScore>secondScore){
-                gameBackground='winBackground'
+                gameBackground='winBackground visibleBackground' 
                 h1Text='First player won'
               }
               else if(secondScore>firstScore){
-                gameBackground='loseBackground'
+                gameBackground='loseBackground visibleBackground'
                 h1Text='Second player won'
               }
               else{
                 h1Text='Draw'
               }
               counterClass='counterMessage';
-              games = 2;
+              games = 10;
 
             }
             return{
@@ -148,20 +150,6 @@ class App extends React.Component {
           })
         }
         else if(i==2){
-          // let games = this.state.games
-          // let firstScore = this.state.firstScore
-          // let secondScore = this.state.secondScore
-          // if(games==0, firstScore>secondScore){
-          //   this.setState({
-          //     h1Text: 'Win!!!'
-          //   })
-          // }
-          // if(games==0, firstScore<secondScore){
-          //   this.setState({
-          //     h1Text: 'Lose'
-          //   })
-          // }
-
           this.setState(function(state){
             return{
               bot : state.images[Math.floor(Math.random()*3)],  
@@ -178,7 +166,6 @@ class App extends React.Component {
       },1000+i*1000)
     }
 
-    // console.log(id);
   }
   render() {
     let result = this.state.result;
@@ -208,7 +195,7 @@ class App extends React.Component {
       <div id='game' >
         <div  className={'bg '+this.state.gameBackground}> </div>
         <div id='gradient' className={gradientClass}></div>
-        <h1>ROCK PAPER SCISSORS</h1>
+        <h1 onClick={(e)=>e.target.className='purple'}>ROCK PAPER SCISSORS</h1>
         <h2 className={this.state.counterClass}>{this.state.counter + this.state.h1Text}</h2>
         <div id="hands">
           <img className={this.state.handClass} src={"images/"+this.state.playerHand+'.svg'} alt="" />
@@ -241,4 +228,3 @@ class App extends React.Component {
 export default App;
 
 
-// Найти картинки для заставки конфити. При победе менять фон сайта .
